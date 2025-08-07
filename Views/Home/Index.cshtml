@@ -1,0 +1,89 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+<style>
+    /* Gradient Background for a modern feel */
+    body {
+        background: linear-gradient(135deg, #e0eafc, #cfdef3);
+        min-height: 100vh;
+    }
+    /* Main container and card styling */
+    .dashboard-container {
+        background-color: rgba(255, 255, 255, 0.95);
+        border-radius: 15px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        padding: 3rem;
+        margin-top: 5rem;
+    }
+    .card-deck .card {
+        border: none;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .card-deck .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    }
+    /* Styles for the dynamic data text */
+    .dynamic-data {
+        font-size: 3rem;
+        font-weight: 700;
+        margin-top: 1rem;
+    }
+    .btn-success {
+        transition: all 0.3s ease;
+    }
+    .btn-success:hover {
+        transform: scale(1.05);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    }
+</style>
+<div class="text-center p-5 dashboard-container">
+    <h1 class="display-4 font-weight-bold">Welcome to the Employee system</h1>
+    <p class="lead mt-3">
+        Quick overview of your employee management system.
+    </p>
+    <hr class="my-4">
+
+
+
+    <div class="mt-5">
+        <a href="/Employee" class="btn btn-success btn-lg" role="button">
+            View Employees
+        </a>
+    </div>
+</div>
+<script>
+    // A professional way to handle data fetching with async/await
+    async function fetchData() {
+        // Simulate a network delay (like an actual API call)
+        await new Promise(resolve => setTimeout(resolve, 1500));
+
+        // Simulate data coming from a server
+        const dashboardData = {
+            totalEmployees: 235,
+            newEmployees: 12,
+            upcomingEvents: "Quarterly review on Aug 20th"
+        };
+        
+        // Update the DOM elements with the fetched data
+        document.getElementById('employee-count').textContent = dashboardData.totalEmployees;
+        document.getElementById('new-employees').textContent = dashboardData.newEmployees;
+        document.getElementById('upcoming-events').textContent = dashboardData.upcomingEvents;
+    }
+
+    // A small animation to make the loading more dynamic
+    function animateDataLoading() {
+        const dataElements = document.querySelectorAll('.dynamic-data');
+        dataElements.forEach(el => {
+            el.textContent = '...';
+        });
+    }
+
+    // Call the functions when the page is fully loaded
+    document.addEventListener("DOMContentLoaded", () => {
+        animateDataLoading();
+        fetchData();
+    });
+</script>
